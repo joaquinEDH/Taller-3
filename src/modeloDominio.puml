@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+left to right direction
+class Usuario {
+rol: String
+username: String
+id: int
+password: String
+}
+class Manga {
+isbn: String
+titulo: String
+stock: int
+descripcion: String
+precio: int
+}
+class Comentario {
+isbn: String
+cantidadComentarios: int
+comentarios: List<String>
+}
+class Compra {
+id: int
+isbn: String
+usernameId: int
+estado: String
+fecha: String
+cantidad: int
+}
+class Administrador {
+rol: String
+username: String
+id: int
+password: String
+}
+
+Usuario "1..." -- "1..." Compra : realiza
+Manga "1" -- "0..." Comentario : recibe
+Usuario "0..." -- "0..." Manga : valora
+Usuario "0..." -- "0..." Comentario : realiza
+Administrador "1" -- "1..." Manga : gestiona
+Administrador "1" -- "1...*" Compra : gestiona
+@enduml

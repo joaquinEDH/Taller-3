@@ -1,0 +1,111 @@
+@startuml
+package Model{
+class Comentario{
+- isbn: String
+- cantidadComentarios: int
+- comentarios: List<String>
+
++ Comentario(isbn: String, cantidadComentarios: int, comentarios: List<String>): comentario
++ getIsbn(): String
++ getCantidadComentarios(): int
++ getComentarios(): List<String>
++ setIsbn(): String
++ setCantidadComentarios(): int
++ setCantidadDeComentarios(): List<String>
+}
+class Manga{
+- isbn: String
+- titulo: String
+- stock: int
+- descripcion: String
+- precio: int
+
++ Manga(isbn: String, titulo: String, stock: int, descripcion: String, precio: int): manga
++ getIsbn(): String
++ getTitulo(): String
++ getStock(): int
++ getDescripcion(): String
++ getPrecio(): int
++ setIsbn(): String
++ setTitulo(): String
++ setStock(): int
++ setDescripcion(): String
++ setPrecio(): int
+}
+class Usuario{
+- rol: String
+- username: String
+- id: int
+- password: String
+- administradorId: Integer
+
++ Usuario(rol: String, username: String, id: int, password: String, administradorId: Integer): usuario
++ Usuario(rol: String, username: String, id: int, password: String): usuario
++ getRol(): String
++ getUsername(): String
++ getId(): int
++ getPassword(): String
++ getAdministradorId(): Integer
++ setRol(): String
++ setUsername(): String
++ setId(): int
++ setPassword(): String
++ setAdministradorId(): Integer
+}
+class Compra{
+- id: int
+- isbn: String
+- usernameId: int
+- estado: String
+- fecha: String
+- cantidad: int
+
++ Compra(id: int, isbn: String, usernameId: int, estado: String, fecha: String, cantidad: int) : compra
++ getId(): int
++ getIsbn(): String
++ getUsernameId(): int
++ getEstado(): String
++ getFecha(): String
++ getCantidad(): int
++ setId(): int
++ setIsbn(): String
++ setUsernameId(): int
++ setEstado(): String
++ setFecha(): String
++ setCantidad(): int
+}
+}
+package Services{
+interface Sistema{
+iniciarSesionAdministrador(administradorId: int, username: String, password: String): boolean
+iniciarSesionUsuario(username: String, password: String): boolean
+registrarManga(mangas: Manga): void
+verUltimasCompras(): List<Compra>
+actualizarEstadoCompra(setUsernameId: int, nuevoEstado: String): void
+buscarManga(titulo: String): List<Manga>
+verComprasUsuario(usernameId: int): void
+valorarManga(isbn: String, comentario: String, valoracion: double): void
+visualizarComentarios(isbn: String): List<String>
+estadisticas(): void
+comprarManga(usernameId: int, isbn: String, cantidad: int, estado: String): void
+guardarDatos(): void
+
+mostrarMenu(): void
+}
+class SistemaImpl{
+- instance: SistemaImpl
+- usuarios: List<Usuario>
+- mangas: List<Manga>
+- comentarios: List<Comentario>
+- compras: List<Compra>
+- scanner: Scanner
++ SistemaImpl getInstance(): SistemaImpl
++ cargarDatos(): void
++ guardarDatos(): void
++ mostrarMenu(): void
+}
+
+SistemaImpl "1" --|> "1" Sistema
+
+
+@enduml
